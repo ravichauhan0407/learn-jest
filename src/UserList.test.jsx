@@ -20,7 +20,7 @@ test('testing input',()=>{
     const mock=jest.fn()
     render(<UserList onSubmit={mock}/>)
     
-    const input=screen.getByRole('textbox')
+    const input=screen.getByRole('textbox',{name:/name/i})
     const button=screen.getByRole('button');
     
     userEvent.click(input)
