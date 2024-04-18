@@ -24,7 +24,7 @@ test('testing input',()=>{
     const button=screen.getByRole('button');
     
     userEvent.click(input)
-    const name='Ravi Chauhan'
+    const name='Ravi'
     userEvent.keyboard(name)
 
     userEvent.click(button)
