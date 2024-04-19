@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const UserList = ({onSubmit}) => {
-  const [name,setName] =  useState('')
-
-  const handleSubmit=()=>{
-    onSubmit({name})
-  }
-
+const UserList = ({users}) => {
   return (
-    <div title='div'>
-        <label htmlFor='email'>Name</label>
-        <input id='email' onChange={(e)=>setName(e.target.value)}/>
-        <button onClick={handleSubmit}>Submit</button>
-    </div>
+     <table>
+        <thead>
+            <tr>
+                <th>Name</th>     
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody data-testid='users'>
+          {users?.map((item,index)=><tr key={index}>
+              <td>{item?.name}</td>
+              <td>{item?.email}</td>
+          </tr>)}
+        </tbody>
+     </table>
   )
 }
 

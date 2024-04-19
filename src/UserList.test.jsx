@@ -1,36 +1,17 @@
-import { render,screen } from "@testing-library/react";
-import UserList from "./UserList";
+import { render,screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
+import UserList from './UserList'
 
 test('render test',()=>{
-    render(<UserList/>)
+    const users=[
+      {name:'Ravi',email:'ravi@gmail.com'},
+      {name:'Chauhan' ,email:'Chauhan@gmail.com'},
+    ]
 
-   const div= screen.queryAllByTitle('div');
-   console.log(div)
-   expect(div).toHaveLength(1)
-})
+    render(<UserList users={users}/>);
 
-test('testing input',()=>{
-    // not the good implementation 
-    // let argList=[]
-    // const callback=(...args)=>{
-    //   argList.push(args)
-    // }
-    const mock=jest.fn()
-    render(<UserList onSubmit={mock}/>)
-    
-    const input=screen.getByRole('textbox',{name:/name/i})
-    const button=screen.getByRole('button');
-    
-    userEvent.click(input)
-    const name='Ravi'
-    userEvent.keyboard(name)
+    const rows=within(screen.getByTestId('users')).getAllByRole('row');
 
-    userEvent.click(button)
-
-    expect(mock).toHaveBeenCalled();
-    expect(mock).toHaveBeenCalledWith({name});
-
+    expect(rows).toHaveLength(2);
 
 })
